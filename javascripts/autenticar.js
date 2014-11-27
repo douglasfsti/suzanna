@@ -1,5 +1,8 @@
 var ready_for_capture = false;
 
+var server = 'http://54.94.221.41:5000/';
+//var server = 'http://127.0.0.1:5000/';
+
 $('#cadastrar').click(function () {
     ready_for_capture = true;
 });
@@ -8,6 +11,7 @@ tracker.on('track', function (event) {
     image_is_locked = false;
     event.data.forEach(function (rect) {
         context.strokeStyle = '#7859a9';
+        context.lineWidth = 2;
         context.strokeRect(rect.x, rect.y, rect.width, rect.height);
         context.font = '11px Helvetica';
         context.fillStyle = "#fff";
@@ -33,10 +37,14 @@ tracker.on('track', function (event) {
                 'imagem': canvas_crop.toDataURL('image/jpeg')
             };
 
-            $.post('http://54.94.221.41:5000/autenticar',
+            $.post(server + 'autenticar',
                     params,
                     function (data, status) {
-                        $('#resposta').html(data.nome);
+                        if (data.nome !== "") {
+                            $('#resposta').show();
+                            $('#resposta').html(data.nome);
+                            ready_for_capture = false;
+                        }
                     });
         }
 

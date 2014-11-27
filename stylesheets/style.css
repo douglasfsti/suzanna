@@ -136,7 +136,7 @@ a, a:hover {
 /*HEADER AND NAVIGATION*/
 #masthead {
     min-height: 90px;
-    display: none;
+    /* display: none; */
     position: fixed;
     top: 0;
     width: 100%;
@@ -2104,3 +2104,35 @@ fieldset h1 {
     }
 }
 
+#image, #canvas_crop {
+    display: none;
+}
+
+#canvas, #webcam {
+    float: left;
+    margin-top: 40px;
+}
+
+#canvas {
+    margin-left: -320px;
+}
+
+#autenticar .right {
+    width: 640px;
+    float: right;
+    margin-top: 40px;
+    padding: 10px;
+    background: #000;
+}
+
+#autenticar .right .btn {
+    background: #7859a9;
+}
+
+#autenticar #resposta {
+    color: #fff;
+    margin-top: 0px;
+    text-align: center;
+    background: green;
+    display: none;
+}

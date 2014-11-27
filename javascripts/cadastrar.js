@@ -1,5 +1,9 @@
 var ready_for_capture = false;
 
+var server = 'http://54.94.221.41:5000/';
+//var server = 'http://127.0.0.1:5000/';
+var matricula = "";
+
 $('#cadastrar').click(function () {
     ready_for_capture = true;
 });
@@ -9,6 +13,7 @@ tracker.on('track', function (event) {
     event.data.forEach(function (rect) {
         context.strokeStyle = '#7859a9';
         context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        context.lineWidth = 2;
         context.font = '11px Helvetica';
         context.fillStyle = "#fff";
         context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
@@ -35,24 +40,26 @@ tracker.on('track', function (event) {
                     'imagem': canvas_crop.toDataURL('image/jpeg')
                 };
 
-                $.post('http://54.94.221.41:5000/cadastrar',
+                $.post(server + 'cadastrar',
                         params, function (data, status) {
                             if (data.status_cadastro) {
-                                images_captured += 1;
-
+                                $('#resposta').show();
                                 $('#resposta').html(data.resposta +
-                                        ' matricula: ' + data.matricula +
-                                        ' imagens capturadas: ' + images_captured);
+                                        ' Imagens capturadas: ' + images_captured);
+                                images_captured += 1;
+                                matricula = data.matricula;
                             }
                         });
-            } else if (images_captured > 10) {
+            } else if (images_captured >= 10) {
                 params = {
                     'email': $('#email').val()
                 };
-                $.post('http://54.94.221.41:5000/processar_arquivos',
+                $.post(server + 'processar_arquivos',
                         params, function (data, status) {
-                            console.log(status, data);
+                            $('#resposta').html(data.resposta +
+                                    ' Matricula: ' + matricula);
                         });
+                ready_for_capture = false;
             }
         }
 
