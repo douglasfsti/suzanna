@@ -40,12 +40,12 @@ a, a:hover {
 }
 
 ::-moz-selection{
-    background: #7859a9; 
+    background: #23a6c2; 
     color: #fff; 
     text-shadow: none;
 }
 ::selection {
-    background: #7859a9; 
+    background: #23a6c2; 
     color: #fff; 
     text-shadow: none;
 } 
@@ -181,7 +181,7 @@ a, a:hover {
 .main-heading {
     font-family: "Tex_B";
     font-weight: normal;
-    color: #7859a9;
+    color: #23a6c2;
     font-size: 54px;
     line-height: 61px;
     margin-top: 15px;
@@ -346,7 +346,7 @@ a, a:hover {
 #explore a img {
     display: none;
     opacity: 1;
-    background: #7859a9;
+    background: #23a6c2;
     width: 68px;
     height: 68px;
     border-radius: 68px;
